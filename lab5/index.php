@@ -8,6 +8,7 @@ if ($conn->connect_errno) {
     die($conn->connect_error);
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,5 +47,6 @@ if ($conn->connect_errno) {
 <?php
   $conn->close();
 ?>  
+
 </body>
 </html>
