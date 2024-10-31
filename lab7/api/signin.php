@@ -9,7 +9,7 @@ if (isset($_POST['signin'])) {
             FROM users  JOIN student  
             ON username=studentID
             WHERE username=?';
-    $stmt = $conn->prepare($sql);
+    $stmt = $conn->prepare($sql);//ไม่ไว้ใจรหัสได้ แยกข้อมูลออกจากsql 
     $stmt->bind_param('s', $username);
     $stmt->execute();
     $result = $stmt->get_result();
