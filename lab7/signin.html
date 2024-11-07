@@ -35,24 +35,54 @@
   </head>
   <body class="d-flex align-items-center py-4 bg-body-tertiary">
     <main class="form-signin w-100 m-auto">
-      <form action="signin.php" method="POST">
-        <!-- <img class="mb-4" src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> -->
-        <h1 class="h3 mb-3 fw-normal">เข้าสู่ระบบ</h1>
-    
+
+      <form name="signin">
+        <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+        <div class=""alert alert="danger" id="error"></div>
+
         <div class="form-floating">
-          <input type="text" class="form-control" id="floatingEmail" name = "username" placeholder="username">
-          <label for="floatingEmail">Username</label>
+          <input type="Username" class="form-control" id="floatingUsername" name="username" placeholder="Username">
+          <label for="floatingUsername">Username</label>
         </div>
         <div class="form-floating">
           <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password">
           <label for="floatingPassword">Password</label>
         </div>
     
-        <button class="btn btn-primary w-100 py-2" type="submit" name="Signin" >Sign in</button>
-        <p class="small fw-bold mt-2 pt-1 mb-0">Babeค้าบสมัครรหัสรึยังงับอ้วงจุ๊บมั่ว? <a href="signup.html" class="link-danger">สมัคร</a></p>
-        <!-- <p class="mt-5 mb-3 text-body-secondary">© 2017–2023</p> -->
+        <button class="btn btn-primary w-100 py-2" type="submit" id="signin" name="signin" onclick="sign_in(event)">Sign in</button>
+      <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="signup.html" class="link-danger">Register</a></p> 
+
       </form>
     </main>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script>
+    function sign_up(event) {
+            event.preventDefault();
+            const body = new FormData(document.forms['signin'],
+                document.getElementById('signin')
+        );
+            if (body.get('password') == '') {
+                error.innerHTML = 'Password is required.';
+                return;
+            }
+            fetch('./api/signin.php',
+            {
+                method: 'POST',
+                body
+            }
+            )
+                .then(response=> {
+            if (response.ok) {
+                location.href = 'index.php';
+                }
+            else {
+                response.text()
+                .then(data=>{
+                error.innerHTML = data;
+                error.hidden = false;
+                }); 
+            }
+        });
+    }
+    </script>
   </body>
 </html>
