@@ -1,6 +1,6 @@
 <?php
 include 'header.php';
-require 'db.php';
+
 $sql = "select * from student where studentID='{$_SESSION['user']['studentID']}'";
 $result = $conn->query($sql);
 $student = $result->fetch_assoc();
@@ -60,7 +60,19 @@ $conn->close();
        </div>
      </div>
    </div>
- </form> 
+ </form>
+ <script>
+  function preview() {
+   const profileImage = document.getElementById('profile-image');
+   const image = document.getElementById('image');
+   image.innerHTML = '<img class="img-fluid rounded-circle">';
+   const img = image.querySelector('img');
+   img.src = URL.createObjectURL(profileImage.files[0]);
+   img.onload = () => {
+     URL.revokeObjectURL(img.src);
+   };
+ }
+ </script> 
 <?php
 include 'footer.php';
 ?>

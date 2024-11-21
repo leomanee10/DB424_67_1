@@ -62,8 +62,4 @@ catch (Exception) {
     echo 'Sever error.';
 }
 }
-else {
-    http_response_code(401);
-    echo "Unauthorized."
-}
 ?>
