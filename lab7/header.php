@@ -34,14 +34,14 @@ if (!isset($_SESSION['user'])){
 
         <?php
         require 'db.php';
-        $sql = " select image from student 
-        where studentID='{$_SESSION['user']['studentID']}'"
-        $student = $conn->query($sql)->fetch_assoc();
+        $sql = "select image from student
+        where studentID='{$_SESSION['user']['studentID']}'";
+        $student = $conn-> query ($sql)-> fetch_assoc();
         ?>
 
         <div class="dropdown text-end">
           <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="images/profile/<?php echo $student['image']; ?>" alt="mdo" width="32" height="32" class="rounded-circle">
+          <img src= "Images/profile/<?php echo $student['image']; ?>" alt="mdo" width = "32" height = "32" class="rouded-circle">
           </a>
           <ul class="dropdown-menu text-small" style="">
             <li><a class="dropdown-item" href="profile.php">Profile</a></li>
